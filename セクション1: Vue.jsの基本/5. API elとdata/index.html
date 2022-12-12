@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <!-- ⭐️ dataの値をHTMLに埋め込む。-->
+    <div id="app">{{ message }}</div>
+
+    <script>
+      const app = new Vue({
+        // ⭐️ 仮想DOMにする範囲を指定する。
+        el: '#app',
+        // ⭐️ 仮想DOMの範囲内で使用するデータを定義する。
+        data() {
+          return {
+            message: 'Hello Vue!',
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

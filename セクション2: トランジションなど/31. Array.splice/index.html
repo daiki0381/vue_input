@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const character = [
+        {
+          id: 1,
+          name: 'Alice',
+        },
+        {
+          id: 2,
+          name: 'Bob',
+        },
+        {
+          id: 3,
+          name: 'Carol',
+        },
+      ];
+      // ⭐️ 配列.splice(開始位置, 削除する数, 追加する要素);
+      character.splice(2, 1, { id: 3, name: 'Charlie' });
+      character.splice(3, 0, { id: 4, name: 'Dave' });
+    </script>
+  </body>
+</html>

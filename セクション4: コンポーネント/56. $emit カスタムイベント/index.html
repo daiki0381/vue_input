@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+      .parent {
+        width: 800px;
+        margin: 0 auto;
+        border: 1px solid red;
+        padding: 50px;
+      }
+      .child {
+        width: 50%;
+        margin: 0 auto;
+        border: 1px solid blue;
+        padding: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="parent">
+      <my-component class="child" @custom-event="parentMethod"></my-component>
+      {{ message }}
+    </div>
+
+    <script>
+      const myComponent = {
+        template: `
+          <div>
+            <button @click="childMethod">Click!</button>
+          </div>
+        `,
+        data() {
+          return {
+            message: 'Hello Vue!',
+          };
+        },
+        methods: {
+          childMethod() {
+            // ⭐️ 子コンポーネントのイベントが発生した時に、親コンポーネントのメソッドを呼び出す。
+            // ⭐️ 子コンポーネントから親コンポーネントにデータを渡す。
+            this.$emit('custom-event', this.message);
+          },
+        },
+      };
+
+      const app = new Vue({
+        el: '#app',
+        components: {
+          myComponent,
+        },
+        data() {
+          return {
+            message: '',
+          };
+        },
+        methods: {
+          parentMethod(value) {
+            this.message = value;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

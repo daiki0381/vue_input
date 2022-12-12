@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <a :href="book.url">{{ book.author }} : {{ book.title }}</a>
+      <!-- ⭐️ 属性をまとめて指定する。-->
+      <input
+        v-bind="{type: input.type, name: input.name, placeholder: input.placeholder}"
+      />
+      <input v-bind="input" />
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            book: {
+              title: 'タイトル',
+              author: '著者',
+              url: 'https://www.google.com',
+            },
+            input: {
+              type: 'text',
+              name: '名前',
+              placeholder: '名前を入力してください。',
+            },
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

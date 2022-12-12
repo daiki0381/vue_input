@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+      li {
+        list-style: none;
+      }
+      .done {
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="newTodo" />
+      <button @click.prevent="addTodo">追加</button>
+      <input type="text" v-model="query" />検索
+      <ul>
+        <li v-for="(todo, index) in filteredTodos">
+          <input type="checkbox" v-model="todo.isDone" />
+          <span :class="{done: todo.isDone}">{{ todo.item }}</span>
+          <button @click.prevent="deleteTodo(index)">削除</button>
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            newTodo: '',
+            todos: [],
+            query: '',
+          };
+        },
+        methods: {
+          addTodo() {
+            if (!this.newTodo) return;
+            const todo = {
+              item: this.newTodo,
+              isDone: false,
+            };
+            this.todos.push(todo);
+            this.newTodo = '';
+          },
+          deleteTodo(index) {
+            this.todos.splice(index, 1);
+          },
+        },
+        computed: {
+          filteredTodos() {
+            const _this = this;
+            return this.todos.filter((todo) => {
+              return todo.item.indexOf(_this.query) !== -1;
+            });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

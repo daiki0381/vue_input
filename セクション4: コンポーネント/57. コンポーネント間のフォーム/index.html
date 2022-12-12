@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+      .parent {
+        width: 800px;
+        margin: 0 auto;
+        border: 1px solid red;
+        padding: 50px;
+      }
+      .child {
+        width: 50%;
+        margin: 0 auto;
+        border: 1px solid blue;
+        padding: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="parent">
+      <!-- ⭐️ 子コンポーネントから渡された値が$eventに格納されている。-->
+      <my-component
+        class="child"
+        :value="parentValue"
+        @custom-input="parentValue = $event"
+      ></my-component>
+      {{ parentValue }}
+    </div>
+
+    <script>
+      const myComponent = {
+        template: `
+          <div>
+            <input :value="value" @input="childMethod" />
+          </div>
+        `,
+        props: {
+          value: {
+            type: String,
+          },
+        },
+        methods: {
+          childMethod(e) {
+            this.$emit('custom-input', e.target.value);
+          },
+        },
+      };
+
+      const app = new Vue({
+        el: '#app',
+        components: {
+          myComponent,
+        },
+        data() {
+          return {
+            parentValue: '',
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

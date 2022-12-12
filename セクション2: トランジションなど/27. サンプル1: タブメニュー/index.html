@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/app.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <section class="tab">
+        <ul class="tab__label">
+          <li v-for="menu in menus" :key="menu.id">
+            <a
+              href="#"
+              @click.prevent="activate(menu.id)"
+              :class="{ active: active === menu.id }"
+              >{{ menu.title }}</a
+            >
+          </li>
+        </ul>
+        <div
+          class="tab__content"
+          v-for="content in contents"
+          :key="content.id"
+          v-show="active === content.id"
+        >
+          {{ content.title }}
+        </div>
+      </section>
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            active: 1,
+            menus: [
+              {
+                id: 1,
+                title: 'サイトの情報',
+              },
+              {
+                id: 2,
+                title: '商品情報',
+              },
+              {
+                id: 3,
+                title: 'お問い合わせ',
+              },
+            ],
+            contents: [
+              {
+                id: 1,
+                title: 'サイトの情報。サイトの情報。',
+              },
+              {
+                id: 2,
+                title: '商品情報。商品情報。',
+              },
+              {
+                id: 3,
+                title: 'お問い合わせ。お問い合わせ。',
+              },
+            ],
+          };
+        },
+        methods: {
+          activate(id) {
+            this.active = id;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

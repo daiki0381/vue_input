@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+      .parent {
+        width: 800px;
+        margin: 0 auto;
+        border: 1px solid red;
+        padding: 50px;
+      }
+      .child {
+        width: 50%;
+        margin: 0 auto;
+        border: 1px solid blue;
+        padding: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="parent">
+      <my-component class="child" is-show></my-component>
+      <my-component class="child" :message="message"></my-component>
+      <my-component class="child"></my-component>
+    </div>
+
+    <script>
+      const myComponent = {
+        template: `
+          <div>
+            <button @click="getIsShow = !getIsShow">表示/非表示</button>
+            <div v-show="getIsShow">{{ getMessage }}</div>
+          </div>
+        `,
+        props: {
+          message: {
+            type: String,
+            default: 'Hello Vue.js!',
+          },
+          isShow: {
+            type: Boolean,
+            default: false,
+          },
+        },
+        data() {
+          return {
+            getMessage: this.message,
+            getIsShow: this.isShow,
+          };
+        },
+      };
+
+      const app = new Vue({
+        el: '#app',
+        components: {
+          myComponent,
+        },
+        data() {
+          return {
+            message: 'Hello World!',
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

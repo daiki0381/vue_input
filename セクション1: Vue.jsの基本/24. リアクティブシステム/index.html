@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            // ⭐️ 後からオブジェクトにキーと値を追加する場合、リアクティブにする (get/setを付与する) ための専用のメソッド (Vue.set(オブジェクト, 'キー', '値')) を使用する必要がある。
+            object: {},
+            // ⭐️ 後から配列に値を追加する場合、リアクティブにする (get/setを付与する) ための専用のメソッド (push・splice等) を使用する必要がある。
+            array: [],
+          };
+        },
+      });
+    </script>
+  </body>
+</html>
